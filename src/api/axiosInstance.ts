@@ -20,7 +20,7 @@ axiosInstance.interceptors.request.use(
         const response = await axios.post(
           // "http://192.168.11.150:4000/api/auth",
           // "http://178.236.185.232:4000/api/auth",
-          "https://konverthrnode.onrender.com",
+          "https://konverthrnode.onrender.com/api/auth",
 
           { user_name: "dhaval" },
           { headers: { "Content-Type": "application/json" } } // prevent interceptor reuse
