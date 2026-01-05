@@ -92,7 +92,6 @@ export default function Register() {
     handleSubmit,
     setValue,
     getValues,
-    watch,
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: yupResolver(schema),
