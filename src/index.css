@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css?family=Arvo:700|Open+Sans");
+
+/* .hero-bg {
+  background-image: url('img/hero-area.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+html {
+  overflow-x: hidden;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #abacae;
+  line-height: 25px;
+  backface-visibility: hidden;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 38px;
+  color: #222222;
+  font-weight: 700;
+  font-family: "Arvo", serif;
+}
+
+h3,
+h2,
+h4 {
+  font-family: "Arvo", serif;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.floating-input {
+  @apply w-full pl-10 bg-[#FFF5F5] border border-[#E42128]/30 text-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#E42128] focus:border-[#E42128] transition-all placeholder-gray-500 disabled:opacity-50;
+}
+
+.floating-input.error {
+  @apply border-red-500 ring-2 ring-red-500;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+a {
+  transition: all 0.2s linear;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a a:focus {
+  outline: none;
+}
+
+/* p {
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0px;
+  font-size: 14px;
+} */
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a:not([href]):not([tabindex]) {
+  color: #fff;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out forwards;
+}

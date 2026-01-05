@@ -1,0 +1,121 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState } from "react";
+import { Mail, Lock } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "../components/common/ToastContext";
+import { useAuth } from "../context/useAuth";
+
+export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { showToast } = useToast();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      showToast("⚠️ Please fill in all fields.", "error");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast("Invalid email format.", "error");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Call login from AuthContext
+      await login(email, password);
+
+      // Navigate to checkout after successful login
+      navigate("/pricing");
+    } catch (err) {
+      // Error already handled by toast in AuthContext
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-[#FFF5F5] to-[#FFEAEA] px-6">
+      <div className="bg-white shadow-xl rounded-3xl p-10 w-full max-w-md border border-[#E42128]/10">
+        <h2 className="text-3xl font-bold text-[#E42128] text-center mb-2">
+          Welcome Back 👋
+        </h2>
+        <p className="text-gray-600 text-center mb-6">
+          Login to your{" "}
+          <span className="text-[#E42128] font-semibold">Konvert HR</span>{" "}
+          dashboard
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Email */}
+          <div className="relative">
+            <Mail className="absolute left-3 top-3.5 text-gray-400" size={18} />
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full pl-10 border border-gray-300 rounded-lg px-4 py-2 
+              focus:ring-2 focus:ring-[#E42128] focus:border-[#E42128]"
+            />
+          </div>
+
+          {/* Password */}
+          <div className="relative">
+            <Lock className="absolute left-3 top-3.5 text-gray-400" size={18} />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full pl-10 border border-gray-300 rounded-lg px-4 py-2 
+              focus:ring-2 focus:ring-[#E42128] focus:border-[#E42128]"
+            />
+          </div>
+
+          {/* Options */}
+          <div className="flex justify-between items-center text-sm text-gray-600">
+            <label className="flex items-center gap-2">
+              <input type="checkbox" className="accent-[#E42128]" />
+              Remember me
+            </label>
+            <Link
+              to="/forgot-password"
+              className="text-[#E42128] hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#E42128] text-white py-3 rounded-lg font-semibold 
+            hover:bg-[#c91d22] transition-all disabled:opacity-50"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <p className="text-center text-gray-600 text-sm mt-6">
+          Don’t have an account?{" "}
+          <Link
+            to="/register"
+            className="text-[#E42128] font-semibold hover:underline"
+          >
+            Register here
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
