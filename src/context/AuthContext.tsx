@@ -27,14 +27,46 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string): Promise<void> => {
     try {
       const res = await axiosInstance.post("/api/login", { email, password });
-      const { user_id, message } = res.data;
+      const { message } = res.data;
+
+      const {
+        user_id,
+        token,
+        full_name,
+        email: userEmail,
+        mobile,
+        company_name,
+        gst_number,
+        street,
+        street2,
+        city,
+        pincode,
+        image,
+      } = res.data;
 
       if (!user_id) throw new Error("Login failed");
 
-      // Save userId to localStorage
+      // 🔐 Save auth data
       localStorage.setItem("userId", user_id.toString());
+      localStorage.setItem("token", token);
 
-      // Update state
+      // 👤 Save profile data (for edit profile default values)
+      localStorage.setItem(
+        "profile",
+        JSON.stringify({
+          first_name: full_name?.split(" ")[0] || "",
+          last_name: full_name?.split(" ").slice(1).join(" ") || "",
+          email: userEmail,
+          mobile,
+          company_name,
+          gst_number,
+          street,
+          street2,
+          city,
+          pincode,
+          image,
+        })
+      );
       setUserId(user_id);
 
       toast.success(message || "✅ Login successful!");
