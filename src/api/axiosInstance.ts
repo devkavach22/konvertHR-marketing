@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  // baseURL: "http://192.168.11.150:4000/",
-  baseURL: "http://178.236.185.232:4000/",
+  baseURL: "http://192.168.11.150:4000/",
+  // baseURL: "http://192.168.11.177:4000/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -16,8 +16,8 @@ axiosInstance.interceptors.request.use(
     if (!token || token === "undefined") {
       try {
         const response = await axios.post(
-          // "http://192.168.11.150:4000/api/auth",
-          "http://178.236.185.232:4000/api/auth",
+          "http://192.168.11.150:4000/api/auth",
+          // "http://192.168.11.177:4000/api/auth",
 
           { user_name: "dhaval" },
           { headers: { "Content-Type": "application/json" } } // prevent interceptor reuse

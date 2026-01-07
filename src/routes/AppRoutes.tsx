@@ -20,6 +20,11 @@ import { AuthProvider } from "../context/AuthContext";
 import ForgotPasswordEmail from "../pages/ForgotPasswordEmail";
 import ResetPassword from "../pages/ResetPassword";
 import GuestRoute from "./GuestRoute";
+import SubscriptionHistory from "../pages/SubscriptionHistory";
+import ProfileDashboard from "../pages/ProfileDashboard";
+import SendOtp from "../pages/sendOtp";
+import VerifyOtp from "../pages/VerifyOTP";
+import UpdateContact from "../pages/UpdateContact";
 
 export default function AppRoutes() {
   return (
@@ -36,6 +41,13 @@ export default function AppRoutes() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/subscription" element={<SubscriptionHistory />} />
+              <Route path="/profile" element={<ProfileDashboard />} />
+              <Route path="/send-otp" element={<SendOtp />} />
+<Route path="/verify-otp" element={<VerifyOtp />} />
+<Route path="/update-contact" element={<UpdateContact />} />
+              
+
 
               {/* Auth-related routes */}
               <Route

@@ -8,6 +8,8 @@ export default function Navbar() {
   const { userId, logout } = useAuth();
   const navigate = useNavigate();
 
+  const [open, setOpen] = useState(false);
+
   const menuItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
@@ -17,6 +19,7 @@ export default function Navbar() {
   ];
 
   const handleLogout = () => {
+    localStorage.clear();
     logout();
     navigate("/");
     setIsOpen(false);
@@ -74,14 +77,86 @@ export default function Navbar() {
           </div>
 
           {/* Auth Buttons */}
-          <div className="flex items-center space-x-3 whitespace-nowrap">
+          {/* <div className="flex items-center space-x-3 whitespace-nowrap">
             {userId ? (
               <button
                 onClick={handleLogout}
                 className="bg-[#E42128] text-white px-5 py-2 rounded-full hover:bg-red-700 transition-all duration-300 shadow-sm text-sm font-medium"
               >
-                Logout
+                Logoutttt
               </button>
+            ) : (
+              <>
+                <NavLink
+                  to="/login"
+                  className="border border-[#E42128] text-[#E42128] px-5 py-2 rounded-full hover:bg-[#E42128] hover:text-white transition-all duration-300 text-sm font-medium"
+                >
+                  Log In
+                </NavLink>
+
+                <NavLink
+                  to="/register"
+                  className="bg-[#E42128] text-white px-5 py-2 rounded-full hover:bg-red-700 transition-all duration-300 shadow-sm text-sm font-medium"
+                >
+                  Sign Up
+                </NavLink>
+              </>
+            )}
+          </div> */}
+
+          <div className="relative flex items-center space-x-3">
+            {userId ? (
+              <>
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="flex items-center space-x-2 bg-gray-100 px-3 py-2 rounded-full hover:bg-gray-200 transition"
+                >
+                  <img
+                    src="https://i.pravatar.cc/40"
+                    alt="profile"
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    My Account
+                  </span>
+                </button>
+
+                {/* Dropdown */}
+                {open && (
+                  <div className="absolute right-0 top-14 w-56 bg-white rounded-xl shadow-lg border z-50">
+                    <ul className="py-2 text-sm text-gray-700">
+                      <li
+                        onClick={() => {
+                          navigate("/profile");
+                          setOpen(false);
+                        }}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        👤 Profile
+                      </li>
+
+                      <li
+                        onClick={() => {
+                          navigate("/subscription");
+                          setOpen(false);
+                        }}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        💳 Subscription Plan
+                      </li>
+
+                      <li className="border-t mt-2">
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
+                        >
+                          🚪 Logoutttt
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </>
             ) : (
               <>
                 <NavLink

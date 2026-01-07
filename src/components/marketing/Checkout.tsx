@@ -119,11 +119,14 @@ export default function Checkout() {
             product_id: Number(plan.id),
             transection_number: response.razorpay_payment_id,
             price_unit: Math.round(finalAmount),
+            plan_id: isAnnual ? "Yearly" : "Monthly",
           };
+          
+          console.log("Payment Payload:", paymentPayload);
 
           // ✅ 1. Capture the API Response
           const apiResponse = await axiosInstance.post(
-            "/api/Payment",
+            "/api/create/subscription",
             paymentPayload
           );
 
