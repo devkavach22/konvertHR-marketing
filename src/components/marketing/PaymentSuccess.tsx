@@ -191,7 +191,7 @@ export default function PaymentSuccess() {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 w-full">
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/")}
                 className="flex-1 py-4 rounded-xl text-sm font-bold text-white bg-[#E42128] shadow-lg shadow-red-200 hover:bg-[#c91d22] hover:shadow-red-300 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
               >
                 Go to Dashboard

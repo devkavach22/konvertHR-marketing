@@ -1,5 +1,3 @@
-
-
 /* ================= TYPES ================= */
 
 import axiosInstance from "../api/axiosInstance";
@@ -31,7 +29,6 @@ export interface SendOtpPayload {
   value: string;
 }
 
-
 export interface VerifyOtpPayload {
   type: "email" | "mobile";
   value: string;
@@ -55,10 +52,6 @@ export const getCustomerSubscriptions = async (): Promise<Subscription[]> => {
 
   return res.data?.data || [];
 };
-
-
-
-
 
 export const getUserContactsApi = async (): Promise<Subscription[]> => {
   const userId = localStorage.getItem("userId");
@@ -85,7 +78,6 @@ export const sendOtp = async (payload: {
   return res.data;
 };
 
-
 export const verifyOtp = async (payload: {
   type: "email" | "mobile";
   value: string;
@@ -105,7 +97,6 @@ export const verifyOtp = async (payload: {
   return res.data;
 };
 
-
 export const updateUserContact = async ({
   user_id,
   contact_id,
@@ -115,18 +106,14 @@ export const updateUserContact = async ({
   contact_id: number | string;
   payload: { email?: string; function?: string };
 }) => {
-  console.log('====================================');
-  console.log(payload,"ppppp");
-  console.log('====================================');
-  const res = await axiosInstance.put(
-    `/api/updateUserContact`,
-    payload,
-    {
-      params: {
-        user_id,
-        contact_id,
-      },
-    }
-  );
+  console.log("====================================");
+  console.log(payload, "ppppp");
+  console.log("====================================");
+  const res = await axiosInstance.put(`/api/updateUserContact`, payload, {
+    params: {
+      user_id,
+      contact_id,
+    },
+  });
   return res.data;
 };
