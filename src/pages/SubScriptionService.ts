@@ -115,6 +115,9 @@ export const updateUserContact = async ({
   contact_id: number | string;
   payload: { email?: string; function?: string };
 }) => {
+  console.log('====================================');
+  console.log(payload,"ppppp");
+  console.log('====================================');
   const res = await axiosInstance.put(
     `/api/updateUserContact`,
     payload,

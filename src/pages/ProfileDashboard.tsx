@@ -92,7 +92,8 @@ const ProfileDashboard: React.FC = () => {
           last_name: nameArr.slice(1).join(" ") || "",
           email: primaryContact.email || "",
           mobile: primaryContact.mobile || primaryContact.phone || "",
-          designation: "",
+          designation:
+            primaryContact.job_position || primaryContact.job_position,
         });
       } catch (err) {
         console.error("Failed to load contacts", err);
@@ -106,26 +107,25 @@ const ProfileDashboard: React.FC = () => {
 
   /* ================= SAVE HANDLER ================= */
 
-const onSubmit = async (data: ProfilePayload) => {
-  const hasEmailChanged = data.email !== form.email;
-  const hasMobileChanged = data.mobile !== form.mobile;
+  const onSubmit = async (data: ProfilePayload) => {
+    const hasEmailChanged = data.email !== form.email;
+    const hasMobileChanged = data.mobile !== form.mobile;
 
-  // 🔐 If email/mobile changed → OTP flow
-  if (hasEmailChanged || hasMobileChanged) {
-    navigate("/send-otp", {
-      state: {
-        type: hasEmailChanged ? "email" : "mobile",
-        value: hasEmailChanged ? data.email : data.mobile,
-        pendingProfileData: data,
-      },
-    });
-    return;
-  }
+    // 🔐 If email/mobile changed → OTP flow
+    if (hasEmailChanged || hasMobileChanged) {
+      navigate("/send-otp", {
+        state: {
+          type: hasEmailChanged ? "email" : "mobile",
+          value: hasEmailChanged ? data.email : data.mobile,
+          pendingProfileData: data,
+        },
+      });
+      return;
+    }
 
-  // 🟢 No OTP needed
-  await updateUserContact(data);
-};
-
+    // 🟢 No OTP needed
+    await updateUserContact(data);
+  };
 
   if (loading) return null;
 
@@ -202,7 +202,12 @@ const onSubmit = async (data: ProfilePayload) => {
 
               <button
                 onClick={() =>
-                  navigate("/send-otp", { state: { type: "email" } })
+                  navigate("/send-otp", {
+                    state: {
+                      type: "email",
+                      value: form.email, // ✅ pass current email
+                    },
+                  })
                 }
                 className="h-9 px-3 bg-[#E42128] text-white text-xs font-semibold rounded-md hover:bg-red-700"
               >
@@ -219,7 +224,12 @@ const onSubmit = async (data: ProfilePayload) => {
 
               <button
                 onClick={() =>
-                  navigate("/send-otp", { state: { type: "mobile" } })
+                  navigate("/send-otp", {
+                    state: {
+                      type: "mobile",
+                      value: form.mobile, // ✅ pass current mobile
+                    },
+                  })
                 }
                 className="h-9 px-3 bg-[#E42128] text-white text-xs font-semibold rounded-md hover:bg-red-700"
               >

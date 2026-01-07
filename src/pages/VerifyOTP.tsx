@@ -14,6 +14,9 @@ const VerifyOtp: React.FC = () => {
 
   const { type, value, pendingProfileData } = state || {};
 
+  console.log(pendingProfileData,"pendingProfileData");
+  
+
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const [timer, setTimer] = useState(RESEND_TIMER);
@@ -42,29 +45,22 @@ const VerifyOtp: React.FC = () => {
     try {
       setLoading(true);
 
+      console.log("0000")
+
       // 1️⃣ Verify OTP
       await verifyOtp({
         type,
         value,
         otp,
       });
+    console.log("1111")
+      
+console.log(userId,contactId,"lplpplp");
 
-      // 2️⃣ SINGLE UPDATE API (ALL FIELDS)
-      await updateUserContact({
-        user_id: userId!,
-        contact_id: contactId!,
-        payload: {
-          name: `${pendingProfileData.first_name} ${pendingProfileData.last_name}`,
-          email: pendingProfileData.email,
-          mobile: pendingProfileData.mobile,
-          function: pendingProfileData.designation,
-        },
-      });
-
-      alert("Profile updated successfully");
       navigate("/profile");
     } catch (error) {
-      alert("OTP verification failed");
+      console.log(error)
+      // alert("OTP verification failed");
     } finally {
       setLoading(false);
     }
