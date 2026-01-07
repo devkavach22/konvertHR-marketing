@@ -5,17 +5,16 @@ import {
   sendOtp,
   updateUserContact,
 } from "./SubScriptionService";
+import { useToast } from "../components/common/ToastContext";
 
 const RESEND_TIMER = 30;
 
 const VerifyOtp: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { showToast } = useToast();
 
-  const { type, value, pendingProfileData } = state || {};
-
-  console.log(pendingProfileData,"pendingProfileData");
-  
+  const { type, value } = state || {};
 
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,14 +37,12 @@ const VerifyOtp: React.FC = () => {
   /* ================= VERIFY OTP ================= */
   const handleVerifyOtp = async () => {
     if (otp.length !== 6) {
-      alert("Enter valid 6-digit OTP");
+      showToast("Enter valid 6-digit OTP", "error");
       return;
     }
 
     try {
       setLoading(true);
-
-      console.log("0000")
 
       // 1️⃣ Verify OTP
       await verifyOtp({
@@ -53,14 +50,29 @@ const VerifyOtp: React.FC = () => {
         value,
         otp,
       });
-    console.log("1111")
-      
-console.log(userId,contactId,"lplpplp");
 
+      // 2️⃣ Update contact with new email/mobile
+      if (userId && contactId) {
+        const updatePayload: { email?: string; mobile?: string } = {};
+        
+        if (type === "email") {
+          updatePayload.email = value;
+        } else if (type === "mobile") {
+          updatePayload.mobile = value;
+        }
+
+        await updateUserContact({
+          user_id: userId,
+          contact_id: contactId,
+          payload: updatePayload,
+        });
+      }
+
+      showToast(`${type === "email" ? "Email" : "Mobile"} updated successfully`, "success");
       navigate("/profile");
     } catch (error) {
-      console.log(error)
-      // alert("OTP verification failed");
+      console.error("OTP verification failed", error);
+      showToast("OTP verification failed", "error");
     } finally {
       setLoading(false);
     }
@@ -75,9 +87,9 @@ console.log(userId,contactId,"lplpplp");
         type,
         value,
       });
-      alert("OTP resent successfully");
+      showToast("OTP resent successfully", "success");
     } catch {
-      alert("Failed to resend OTP");
+      showToast("Failed to resend OTP", "error");
     }
   };
 

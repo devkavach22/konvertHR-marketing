@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { updateProfile, type ProfilePayload } from "./ProfileEditService";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getUserContactsApi, updateUserContact } from "./SubScriptionService";
+import { useToast } from "../components/common/ToastContext";
+
+export interface ProfilePayload {
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile: string;
+  designation: string;
+}
 
 /* ================= FIELD COMPONENT ================= */
 
@@ -51,13 +59,15 @@ const Field: React.FC<FieldProps> = React.memo(
 
 const ProfileDashboard: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { showToast } = useToast();
   const [isEdit, setIsEdit] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [contactId, setContactId] = useState<string | null>(null);
 
   /* ================= REACT HOOK FORM ================= */
 
   const {
-    register,
     handleSubmit,
     reset,
     formState: { errors },
@@ -79,10 +89,16 @@ const ProfileDashboard: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const data = await getUserContactsApi();
+        const data = await getUserContactsApi() as any;
 
         const primaryContact = data?.contacts?.[0];
         if (!primaryContact) return;
+
+        // Store contactId for later use
+        if (primaryContact.id) {
+          setContactId(String(primaryContact.id));
+          localStorage.setItem("contactId", String(primaryContact.id));
+        }
 
         const fullName = primaryContact.name || "";
         const nameArr = fullName.trim().split(" ");
@@ -103,28 +119,33 @@ const ProfileDashboard: React.FC = () => {
     };
 
     fetchContacts();
-  }, [reset]);
+  }, [reset, location]);
 
   /* ================= SAVE HANDLER ================= */
 
   const onSubmit = async (data: ProfilePayload) => {
-    const hasEmailChanged = data.email !== form.email;
-    const hasMobileChanged = data.mobile !== form.mobile;
+    const userId = localStorage.getItem("userId");
+    const storedContactId = contactId || localStorage.getItem("contactId");
 
-    // 🔐 If email/mobile changed → OTP flow
-    if (hasEmailChanged || hasMobileChanged) {
-      navigate("/send-otp", {
-        state: {
-          type: hasEmailChanged ? "email" : "mobile",
-          value: hasEmailChanged ? data.email : data.mobile,
-          pendingProfileData: data,
-        },
-      });
+    if (!userId || !storedContactId) {
+      showToast("User or contact ID not found", "error");
       return;
     }
 
-    // 🟢 No OTP needed
-    await updateUserContact(data);
+    try {
+      await updateUserContact({
+        user_id: userId,
+        contact_id: storedContactId,
+        payload: {
+          function: data.designation,
+        },
+      });
+      setIsEdit(false);
+      showToast("Profile updated successfully", "success");
+    } catch (err) {
+      console.error("Failed to update profile", err);
+      showToast("Failed to update profile", "error");
+    }
   };
 
   if (loading) return null;

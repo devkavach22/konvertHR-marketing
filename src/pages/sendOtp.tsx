@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sendOtp } from "./SubScriptionService";
+import { useToast } from "../components/common/ToastContext";
 
 const SendOtp: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { showToast } = useToast();
   const { type, value: initialValue } = state || {};
 
   const [value, setValue] = useState(initialValue || "");
@@ -13,14 +15,19 @@ const SendOtp: React.FC = () => {
   const userId = localStorage.getItem("userId");
 
   const handleSendOtp = async () => {
-    if (!value) return alert("Value is required");
+    if (!value) {
+      showToast("Value is required", "error");
+      return;
+    }
 
     if (type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      return alert("Invalid email");
+      showToast("Invalid email", "error");
+      return;
     }
 
     if (type === "mobile" && value.length < 10) {
-      return alert("Invalid mobile number");
+      showToast("Invalid mobile number", "error");
+      return;
     }
 
     try {
@@ -33,7 +40,7 @@ const SendOtp: React.FC = () => {
 
       navigate("/verify-otp", { state: { type, value } });
     } catch {
-      alert("Failed to send OTP");
+      showToast("Failed to send OTP", "error");
     } finally {
       setLoading(false);
     }
