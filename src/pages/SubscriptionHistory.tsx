@@ -9,9 +9,9 @@ const SubscriptionHistory: React.FC = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [downloadingInvoiceId, setDownloadingInvoiceId] = useState<number | null>(
-    null
-  );
+  const [downloadingInvoiceId, setDownloadingInvoiceId] = useState<
+    number | null
+  >(null);
 
   useEffect(() => {
     const fetchSubscriptions = async () => {
@@ -187,9 +187,7 @@ const SubscriptionHistory: React.FC = () => {
                       <td className="px-6 py-4">
                         {invoice ? (
                           <button
-                            onClick={() =>
-                              handleDownload(invoice.invoice_id)
-                            }
+                            onClick={() => handleDownload(invoice.invoice_id)}
                             disabled={
                               downloadingInvoiceId === invoice.invoice_id
                             }
