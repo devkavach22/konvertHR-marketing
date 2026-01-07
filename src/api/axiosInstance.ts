@@ -1,8 +1,15 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
+<<<<<<< HEAD
   baseURL: "http://192.168.11.150:4000/",
   // baseURL: "http://192.168.11.177:4000/",
+=======
+  // baseURL: "http://192.168.11.150:4000/",
+  // baseURL: "http://178.236.185.232:4000/",
+  baseURL: "https://konverthrnode.onrender.com",
+
+>>>>>>> 4918c692858b11841c5c8a9688a617ef53833962
   headers: {
     "Content-Type": "application/json",
   },
@@ -16,8 +23,14 @@ axiosInstance.interceptors.request.use(
     if (!token || token === "undefined") {
       try {
         const response = await axios.post(
+<<<<<<< HEAD
           "http://192.168.11.150:4000/api/auth",
           // "http://192.168.11.177:4000/api/auth",
+=======
+          // "http://192.168.11.150:4000/api/auth",
+          // "http://178.236.185.232:4000/api/auth",
+          "https://konverthrnode.onrender.com/api/auth",
+>>>>>>> 4918c692858b11841c5c8a9688a617ef53833962
 
           { user_name: "dhaval" },
           { headers: { "Content-Type": "application/json" } } // prevent interceptor reuse
