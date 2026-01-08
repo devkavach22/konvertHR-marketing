@@ -278,7 +278,7 @@ export default function PaymentSuccess() {
                     Total Paid
                   </span>
                   <div className="text-4xl font-black text-gray-900 tracking-tight">
-                    ₹{Math.round(finalAmount).toLocaleString("en-IN")}
+                    ₹{finalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                   </div>
                 </div>
                 <div className="w-8 h-8 bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
