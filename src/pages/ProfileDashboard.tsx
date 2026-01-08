@@ -89,7 +89,7 @@ const ProfileDashboard: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const data = await getUserContactsApi() as any;
+        const data = (await getUserContactsApi()) as any;
 
         const primaryContact = data?.contacts?.[0];
         if (!primaryContact) return;

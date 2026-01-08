@@ -11,7 +11,7 @@ export interface Product {
 }
 
 export interface Invoice {
- invoice_id: number;
+  invoice_id: number;
   invoice_number: string | false;
   invoice_date: string | false;
   amount: number;
@@ -20,6 +20,7 @@ export interface Invoice {
 }
 
 export interface Subscription {
+  order_date: string;
   subscription_id: number;
   order_number: string;
   plan_name: string;
@@ -47,8 +48,6 @@ export const getCustomerSubscriptions = async (): Promise<Subscription[]> => {
 
   return res.data.data || [];
 };
-
-
 
 export const downloadInvoicePDF = async (invoiceId: number) => {
   const res = await axiosInstance.post(
