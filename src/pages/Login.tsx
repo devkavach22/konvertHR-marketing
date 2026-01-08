@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Mail, Lock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "../components/common/ToastContext";
@@ -11,11 +11,13 @@ export default function Login() {
   const { showToast } = useToast();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const password = passwordRef.current?.value || "";
 
     if (!email || !password) {
       showToast("⚠️ Please fill in all fields.", "error");
@@ -32,6 +34,11 @@ export default function Login() {
     try {
       // Call login from AuthContext
       await login(email, password);
+
+      // Clear password after login attempt
+      if (passwordRef.current) {
+        passwordRef.current.value = "";
+      }
 
       // Navigate to checkout after successful login
       navigate("/pricing");
@@ -72,10 +79,10 @@ export default function Login() {
           <div className="relative">
             <Lock className="absolute left-3 top-3.5 text-gray-400" size={18} />
             <input
+              ref={passwordRef}
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
               className="w-full pl-10 border border-gray-300 rounded-lg px-4 py-2 
               focus:ring-2 focus:ring-[#E42128] focus:border-[#E42128]"
             />

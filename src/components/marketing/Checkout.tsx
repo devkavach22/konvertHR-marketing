@@ -424,7 +424,7 @@ export default function Checkout() {
                   Total Amount Due
                 </span>
                 <span className="text-3xl font-bold text-gray-900">
-                  ₹{Math.round(finalAmount).toLocaleString("en-IN")}
+                  ₹{finalAmount.toLocaleString("en-IN")}
                 </span>
               </div>
             </div>
