@@ -126,7 +126,7 @@ export default function Checkout() {
 
           // ✅ 1. Capture the API Response
           const apiResponse = await axiosInstance.post(
-            "/api/create/subscription",
+            "/Payment",
             paymentPayload
           );
 
