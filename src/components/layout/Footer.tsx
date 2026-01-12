@@ -8,6 +8,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import logo from "../../assets/img/konvertr hr-logo.png"; // ✅ adjust path
+import { Link } from "react-router-dom";
 
 // Custom X (Twitter) icon
 const XIcon = ({ size = 18 }: { size?: number }) => (
@@ -41,11 +42,18 @@ export default function Footer() {
           </h2>
           <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto">
             Join hundreds of businesses already running seamless payroll and
-            workforce automation with <span className="font-semibold">Konvert HR</span>.
+            workforce automation with{" "}
+            <span className="font-semibold">Konvert HR</span>.
           </p>
-          <button className="inline-flex items-center gap-2 bg-white text-[#E42128] px-6 py-3 rounded-full font-semibold hover:bg-[#ffe6e6] transition-all">
+          {/* <button className="inline-flex items-center gap-2 bg-white text-[#E42128] px-6 py-3 rounded-full font-semibold hover:bg-[#ffe6e6] transition-all">
             Request a Free Demo <ArrowRight size={18} />
-          </button>
+          </button> */}
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-white text-[#E42128] px-6 py-3 rounded-full font-semibold hover:bg-[#ffe6e6] transition-all"
+          >
+            Request a Free Demo <ArrowRight size={18} />
+          </Link>
         </div>
       </div>
 
@@ -66,8 +74,8 @@ export default function Footer() {
             </div>
             <p className="text-sm text-gray-600 leading-relaxed mb-6 max-w-sm">
               Konvert HR is your all-in-one HR, Payroll, and Compliance
-              automation suite — built for teams that value accuracy, efficiency,
-              and growth.
+              automation suite — built for teams that value accuracy,
+              efficiency, and growth.
             </p>
 
             <div className="flex space-x-4 mt-6">
@@ -150,13 +158,15 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start space-x-3">
                 <MapPin size={18} className="text-[#E42128] mt-1" />
-                <span>Cross Road, A-53, New York Tower-A, Sarkhej - Gandhinagar Hwy, Thaltej, Ahmedabad, Gujarat 380054</span>
+                <span>
+                  Cross Road, A-53, New York Tower-A, Sarkhej - Gandhinagar Hwy,
+                  Thaltej, Ahmedabad, Gujarat 380054
+                </span>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone size={18} className="text-[#E42128] mt-1" />
                 {/* <span>+91 98765 43210</span> */}
                 <span>+91 072288 88904</span>
-
               </li>
               <li className="flex items-start space-x-3">
                 <Mail size={18} className="text-[#E42128] mt-1" />
@@ -170,7 +180,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center mt-10 text-sm text-gray-500">
           <p>
             © {new Date().getFullYear()}{" "}
-            <span className="text-[#E42128] font-semibold">Konvert HR</span> — 
+            <span className="text-[#E42128] font-semibold">Konvert HR</span> —
             Empowering smarter workplaces.
           </p>
           <div className="flex space-x-4 mt-3 md:mt-0">

@@ -30,7 +30,7 @@ export default function HeroSection() {
           state-of-the-art payroll processing module that is user-friendly,
           highly secure, and compliant with legal and statutory norms. Our
           software is designed to minimize manual intervention and streamline
-          the payroll processes, saving time and resources for businesses of all
+          payroll processes, saving time and resources for businesses of all
           sizes.
         </p>
 
@@ -38,9 +38,9 @@ export default function HeroSection() {
           <button className="bg-[#E42128] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#c91b21] transition shadow-md">
             Get Started
           </button>
-          <button className="bg-white border border-primary text-[#E42128] px-6 py-3 rounded-lg font-medium hover:bg-grey hover:text-[#E42128] transition shadow-md">
+          {/* <button className="bg-white border border-primary text-[#E42128] px-6 py-3 rounded-lg font-medium hover:bg-grey hover:text-[#E42128] transition shadow-md">
             View Demo
-          </button>
+          </button> */}
         </div>
       </div>
 

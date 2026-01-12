@@ -45,9 +45,13 @@ export default function Checkout() {
   const [creatingInvoice, setCreatingInvoice] = useState<boolean>(false);
 
   // Scroll to top on load
+
+  console.log("Plan details:", plan.fee);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const planFee = Number(String(plan.fee || 0).replace(/[^\d.-]/g, "")) || 0;
 
   if (!plan) {
     return (
@@ -77,8 +81,9 @@ export default function Checkout() {
   const baseAmount = avgPrice * employees; // per month
   const yearlyBase = baseAmount * 12;
   const discountedAmount = isAnnual ? yearlyBase * 0.9 : baseAmount;
-  const gstAmount = discountedAmount * 0.18;
-  const finalAmount = discountedAmount + gstAmount;
+  const taxableAmount = discountedAmount + planFee;
+  const gstAmount = taxableAmount * 0.18;
+  const finalAmount = discountedAmount + planFee + gstAmount;
 
   // --- Payment Logic ---
   const loadRazorpayScript = () => {
@@ -119,9 +124,10 @@ export default function Checkout() {
             product_id: Number(plan.id),
             transection_number: response.razorpay_payment_id,
             price_unit: Math.round(finalAmount),
+            
             plan_id: isAnnual ? "Yearly" : "Monthly",
           };
-          
+
           console.log("Payment Payload:", paymentPayload);
 
           // ✅ 1. Capture the API Response
@@ -365,15 +371,33 @@ export default function Checkout() {
               </button>
             </div>
 
+            {planFee > 0 && (
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>One-time Setup Fee</span>
+                <span>
+                  ₹
+                  {planFee.toLocaleString("en-IN", {
+                    minimumFractionDigits: 2,
+                  })}
+                </span>
+              </div>
+            )}
+
             {/* Summary Lines */}
             <div className="space-y-3 pt-2">
               <div className="flex justify-between text-sm text-gray-600">
-                <span>Subtotal ({employees} users × {isAnnual ? "12 months" : "1 month"})</span>
+                <span>
+                  Subtotal ({employees} users ×{" "}
+                  {isAnnual ? "12 months" : "1 month"})
+                </span>
                 <span>
                   ₹
-                  {(isAnnual ? baseAmount * 12 : baseAmount).toLocaleString("en-IN", {
-                    minimumFractionDigits: 2,
-                  })}
+                  {(isAnnual ? baseAmount * 12 : baseAmount).toLocaleString(
+                    "en-IN",
+                    {
+                      minimumFractionDigits: 2,
+                    }
+                  )}
                 </span>
               </div>
 
@@ -424,7 +448,10 @@ export default function Checkout() {
                   Total Amount Due
                 </span>
                 <span className="text-3xl font-bold text-gray-900">
-                  ₹{finalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                  ₹
+                  {finalAmount.toLocaleString("en-IN", {
+                    minimumFractionDigits: 2,
+                  })}
                 </span>
               </div>
             </div>
