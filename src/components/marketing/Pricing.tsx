@@ -62,6 +62,8 @@ export default function Pricing() {
         .filter((item) => item.length > 0);
     }
 
+
+    console.log("planss",plans)
     // STRATEGY 2: Keyword Extraction (Works for your Enterprise Plan)
     // Since the Enterprise plan is one long string, we look for these specific phrases.
     const knownFeatures = [

@@ -104,7 +104,7 @@ export const updateUserContact = async ({
 }: {
   user_id: number | string;
   contact_id: number | string;
-  payload: { email?: string; function?: string };
+  payload: { name?: string; email?: string; mobile?: string; function?: string };
 }) => {
   console.log("====================================");
   console.log(payload, "ppppp");

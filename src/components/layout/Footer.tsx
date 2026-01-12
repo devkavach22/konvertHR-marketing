@@ -2,13 +2,33 @@ import {
   Facebook,
   Instagram,
   Linkedin,
-  Twitter,
   Mail,
   Phone,
   MapPin,
   ArrowRight,
 } from "lucide-react";
 import logo from "../../assets/img/konvertr hr-logo.png"; // ✅ adjust path
+import { Link } from "react-router-dom";
+
+// Custom X (Twitter) icon
+const XIcon = ({ size = 18 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const socialIcons = [
+  { Icon: Facebook, label: "Facebook" },
+  { Icon: Instagram, label: "Instagram" },
+  { Icon: Linkedin, label: "LinkedIn" },
+  { Icon: XIcon, label: "X" },
+];
 
 export default function Footer() {
   return (
@@ -22,11 +42,18 @@ export default function Footer() {
           </h2>
           <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto">
             Join hundreds of businesses already running seamless payroll and
-            workforce automation with <span className="font-semibold">Konvert HR</span>.
+            workforce automation with{" "}
+            <span className="font-semibold">Konvert HR</span>.
           </p>
-          <button className="inline-flex items-center gap-2 bg-white text-[#E42128] px-6 py-3 rounded-full font-semibold hover:bg-[#ffe6e6] transition-all">
+          {/* <button className="inline-flex items-center gap-2 bg-white text-[#E42128] px-6 py-3 rounded-full font-semibold hover:bg-[#ffe6e6] transition-all">
             Request a Free Demo <ArrowRight size={18} />
-          </button>
+          </button> */}
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-white text-[#E42128] px-6 py-3 rounded-full font-semibold hover:bg-[#ffe6e6] transition-all"
+          >
+            Request a Free Demo <ArrowRight size={18} />
+          </Link>
         </div>
       </div>
 
@@ -47,15 +74,16 @@ export default function Footer() {
             </div>
             <p className="text-sm text-gray-600 leading-relaxed mb-6 max-w-sm">
               Konvert HR is your all-in-one HR, Payroll, and Compliance
-              automation suite — built for teams that value accuracy, efficiency,
-              and growth.
+              automation suite — built for teams that value accuracy,
+              efficiency, and growth.
             </p>
 
             <div className="flex space-x-4 mt-6">
-              {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
+              {socialIcons.map(({ Icon, label }, i) => (
                 <a
                   key={i}
                   href="#"
+                  aria-label={label}
                   className="p-2 rounded-full border border-gray-300 hover:bg-[#E42128] hover:text-white text-gray-700 transition-all"
                 >
                   <Icon size={18} />
@@ -110,12 +138,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#E42128] transition">
+                <a href="/" className="hover:text-[#E42128] transition">
                   Blog & Insights
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#E42128] transition">
+                <a href="/contact" className="hover:text-[#E42128] transition">
                   Contact Support
                 </a>
               </li>
@@ -130,11 +158,15 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start space-x-3">
                 <MapPin size={18} className="text-[#E42128] mt-1" />
-                <span>Konvert Towers, Ahmedabad, India</span>
+                <span>
+                  Cross Road, A-53, New York Tower-A, Sarkhej - Gandhinagar Hwy,
+                  Thaltej, Ahmedabad, Gujarat 380054
+                </span>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone size={18} className="text-[#E42128] mt-1" />
-                <span>+91 98765 43210</span>
+                {/* <span>+91 98765 43210</span> */}
+                <span>+91 072288 88904</span>
               </li>
               <li className="flex items-start space-x-3">
                 <Mail size={18} className="text-[#E42128] mt-1" />
@@ -148,7 +180,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center mt-10 text-sm text-gray-500">
           <p>
             © {new Date().getFullYear()}{" "}
-            <span className="text-[#E42128] font-semibold">Konvert HR</span> — 
+            <span className="text-[#E42128] font-semibold">Konvert HR</span> —
             Empowering smarter workplaces.
           </p>
           <div className="flex space-x-4 mt-3 md:mt-0">

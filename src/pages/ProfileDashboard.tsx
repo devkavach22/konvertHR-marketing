@@ -9,6 +9,7 @@ export interface ProfilePayload {
   last_name: string;
   email: string;
   mobile: string;
+  name: string;
   designation: string;
 }
 
@@ -36,10 +37,9 @@ const Field: React.FC<FieldProps> = React.memo(
           readOnly={readOnly}
           onChange={readOnly ? undefined : onChange}
           className={`rounded-lg px-4 py-2 border
-            ${
-              readOnly
-                ? "bg-gray-100 text-gray-500 cursor-not-allowed"
-                : "bg-white"
+            ${readOnly
+              ? "bg-gray-100 text-gray-500 cursor-not-allowed"
+              : "bg-white"
             }
             ${error ? "border-red-500" : "border-gray-300"}
             focus:outline-none focus:ring-2 focus:ring-red-500`}
@@ -137,6 +137,9 @@ const ProfileDashboard: React.FC = () => {
         user_id: userId,
         contact_id: storedContactId,
         payload: {
+          name: `${data.first_name} ${data.last_name}`.trim(),
+          email: data.email,
+          mobile: data.mobile,
           function: data.designation,
         },
       });

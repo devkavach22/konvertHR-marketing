@@ -28,6 +28,9 @@ const SubscriptionHistory: React.FC = () => {
     fetchSubscriptions();
   }, []);
 
+  console.log(subscriptions,"subscriptions");
+  
+
   const handleDownload = async (invoiceId: number) => {
     try {
       setDownloadingInvoiceId(invoiceId);
