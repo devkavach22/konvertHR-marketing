@@ -3,8 +3,8 @@ import axios from "axios";
 const axiosInstance = axios.create({
   // baseURL: "http://192.168.11.150:4000/",
   // baseURL: "http://178.236.185.232:4000/",
-  baseURL: "https://konverthrnode.onrender.com",
-
+  // baseURL: "https://konverthrnode.onrender.com",
+  baseURL: "https://staging.konverthr.com/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -20,8 +20,8 @@ axiosInstance.interceptors.request.use(
         const response = await axios.post(
           // "http://192.168.11.150:4000/api/auth",
           //  "http://178.236.185.232/api/auth",
-          "https://konverthrnode.onrender.com/api/auth",
-
+          // baseURL: "https://konverthrnode.onrender.com",
+          "https://staging.konverthr.com/api/auth",
           { user_name: "dhaval" },
           { headers: { "Content-Type": "application/json" } } // prevent interceptor reuse
         );
