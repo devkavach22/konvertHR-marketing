@@ -12,7 +12,7 @@ export interface AuthContextType {
 
 // Create context
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -20,17 +20,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userId, setUserId] = useState<number | null>(
     localStorage.getItem("userId")
       ? parseInt(localStorage.getItem("userId")!)
-      : null
+      : null,
   );
 
   // Login function
   const login = async (email: string, password: string): Promise<void> => {
     try {
-      const res = await axiosInstance.post("/api/login", { email, password });
-      // const res = await axiosInstance.post("/api/Marketing/pageLogin", {
-      //   email,
-      //   password,
-      // });
+      // const res = await axiosInstance.post("/api/login", { email, password });
+      const res = await axiosInstance.post("/api/Marketing/pageLogin", {
+        email,
+        password,
+      });
 
       const { message } = res.data;
 
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           city,
           pincode,
           image,
-        })
+        }),
       );
       setUserId(user_id);
 
