@@ -3,9 +3,11 @@ services:
     image: konverthr-marketing-frontend
     container_name: konvertHR-marketing-container
     env_file:
-      - .env.development.local
-    build: .
+      - C:\Users\B A P S\Downloads\env.development.download
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - 3000:3000
     restart: always
     # scale: 3
