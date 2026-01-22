@@ -1,13 +1,14 @@
 services:
   konvertHR-marketing:
     image: konverthr-marketing-frontend
-    container_name: konvertHR-marketing-container
+    container_name: konvertHR-marketing-frontend-container
     env_file:
-      - C:\Users\B A P S\Downloads\env.development.download
+      # - .env.development.local
+      - /etc/node-env/marketing.konverthr.env/.env
     build: 
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 3001:3001
     restart: always
     # scale: 3
