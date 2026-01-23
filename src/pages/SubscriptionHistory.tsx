@@ -17,6 +17,8 @@ const SubscriptionHistory: React.FC = () => {
     const fetchSubscriptions = async () => {
       try {
         const data = await getCustomerSubscriptions();
+        console.log(data,"ddd");
+        
         setSubscriptions(data);
       } catch {
         setError("Failed to load subscription history");
