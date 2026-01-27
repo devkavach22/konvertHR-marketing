@@ -375,9 +375,9 @@ export default function PaymentSuccess() {
 
             <div className="mt-8 relative z-10 opacity-60">
               <div className="h-10 w-full bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Code_128_bar_code_for_Wikipedia.svg/1200px-Code_128_bar_code_for_Wikipedia.svg.png')] bg-cover bg-center rounded-sm grayscale"></div>
-              <p className="text-[10px] text-center text-gray-400 font-mono mt-1 tracking-[0.3em]">
+              {/* <p className="text-[10px] text-center text-gray-400 font-mono mt-1 tracking-[0.3em]">
                 {paymentId.substring(0, 12)}...
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

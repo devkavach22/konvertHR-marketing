@@ -22,7 +22,7 @@ export default function StatisticsSection() {
           <p className="text-white/90 mb-8 text-lg leading-relaxed">
             Unlock real-time HR insights with dynamic analytics. Get performance,
             payroll, and attendance stats in one dashboard — empowering your
-            workforce with transparency and data-driven strategy.
+            workforce with transparency and a data-driven strategy.
           </p>
 
           <button className="bg-white text-[#E42128] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all shadow-lg">
