@@ -20,14 +20,15 @@ export default function HeroSection() {
           Revolutionizing Payroll Services and HR Technology
           <br />
           <span className="mt-2 block text-primary">
-             with{" "}
-            <span className="text-[#E42128]">KonvertHR</span>
+            with <span className="text-[#E42128]">KonvertHR</span>
           </span>
         </h1>
 
         <p className="text-gray-700 text-base md:text-md">
-          <span className="text-[#E42128]">Konvert<sub>hr</sub></span> is a
-          state-of-the-art payroll processing module that is user-friendly,
+          <span className="text-[#E42128]">
+            Konvert<sub>hr</sub>
+          </span>{" "}
+          is a state-of-the-art payroll processing module that is user-friendly,
           highly secure, and compliant with legal and statutory norms. Our
           software is designed to minimize manual intervention and streamline
           payroll processes, saving time and resources for businesses of all

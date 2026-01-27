@@ -201,7 +201,7 @@ export default function Footer() {
           <div className="flex space-x-6 mt-3 md:mt-0">
             {/* These don't have routes yet, so I kept them as spans or # links */}
             <Link
-              to="#"
+              to="/privacy-policy"
               className="hover:text-[#E42128] transition cursor-pointer"
             >
               Privacy Policy
@@ -218,7 +218,7 @@ export default function Footer() {
     </footer>
   );
 }
-  
+
 // import {
 //   Facebook,
 //   Instagram,
