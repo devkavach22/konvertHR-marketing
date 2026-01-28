@@ -25,6 +25,7 @@ import SendOtp from "../pages/sendOtp";
 import VerifyOtp from "../pages/VerifyOTP";
 import UpdateContact from "../pages/UpdateContact";
 import ScrollToTop from "../components/common/ScrollToTop"; // ✅ Import here
+import PrivacyPolicy from "../components/marketing/PrivacyPolicy";
 
 export default function AppRoutes() {
   return (
@@ -49,7 +50,7 @@ export default function AppRoutes() {
               <Route path="/send-otp" element={<SendOtp />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/update-contact" element={<UpdateContact />} />
-
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               {/* Auth-related routes */}
               <Route
                 path="/login"
