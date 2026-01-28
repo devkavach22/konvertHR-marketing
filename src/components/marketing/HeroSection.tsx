@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import heroSvg from "../../assets/img/hero-area.svg";
 import heroImg from "../../assets/img/intro-mobile.png";
 
@@ -35,9 +36,11 @@ export default function HeroSection() {
         </p>
 
         <div className="flex flex-wrap gap-4 mt-4">
+          <Link to="/pricing">
           <button className="bg-[#E42128] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#c91b21] transition shadow-md">
             Get Started
           </button>
+          </Link>
           {/* <button className="bg-white border border-primary text-[#E42128] px-6 py-3 rounded-lg font-medium hover:bg-grey hover:text-[#E42128] transition shadow-md">
             View Demo
           </button> */}

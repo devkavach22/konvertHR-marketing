@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Statestic from "../../assets/img/img-1.png";
 
 export default function StatisticsSection() {
@@ -15,19 +16,23 @@ export default function StatisticsSection() {
           </h5>
 
           <h2 className="text-5xl font-extrabold mb-6 leading-tight">
-            Powerful <span className="text-yellow-300">HR Statistics</span> <br />
+            Powerful <span className="text-yellow-300">HR Statistics</span>{" "}
+            <br />
             for Smart Decisions
           </h2>
 
           <p className="text-white/90 mb-8 text-lg leading-relaxed">
-            Unlock real-time HR insights with dynamic analytics. Get performance,
-            payroll, and attendance stats in one dashboard — empowering your
-            workforce with transparency and a data-driven strategy.
+            Unlock real-time HR insights with dynamic analytics. Get
+            performance, payroll, and attendance stats in one dashboard —
+            empowering your workforce with transparency and a data-driven
+            strategy.
           </p>
 
-          <button className="bg-white text-[#E42128] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all shadow-lg">
-            Explore Insights
-          </button>
+          <Link to="/pricing">
+            <button className="bg-white text-[#E42128] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all shadow-lg">
+              Explore Insights
+            </button>
+          </Link>
         </div>
 
         {/* Right Illustration */}
@@ -36,13 +41,13 @@ export default function StatisticsSection() {
           className="flex justify-center md:justify-end relative"
         >
           <div className="relative bg-white rounded-3xl shadow-2xl p-4 md:p-6 transform hover:scale-105 transition-transform duration-300"> */}
-            <img
-              src={Statestic}
-              alt="HR Analytics Dashboard"
-              className="rounded-2xl w-full h-auto"
-            />
-            {/* Glow effect */}
-            {/* <div className="absolute inset-0 bg-gradient-to-tr from-[#E42128]/20 via-transparent to-transparent rounded-2xl"></div>
+        <img
+          src={Statestic}
+          alt="HR Analytics Dashboard"
+          className="rounded-2xl w-full h-auto"
+        />
+        {/* Glow effect */}
+        {/* <div className="absolute inset-0 bg-gradient-to-tr from-[#E42128]/20 via-transparent to-transparent rounded-2xl"></div>
           </div>
         </div> */}
       </div>
